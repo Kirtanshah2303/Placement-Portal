@@ -1,0 +1,63 @@
+.container1 {
+  position: relative;
+  font-family: Arial;
+  width: auto;
+}
+
+.text-block {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 22px;
+  left: 0;
+  width: 50%;
+  height: 35%;
+  top: 70px;
+  bottom: 500px;
+  text-align: left;
+  color: white;
+  padding-top: 1.6rem;
+}
+
+.buttons1 {
+  position: absolute;
+  top: 122px;
+  bottom: 500px;
+  text-decoration: none;
+}
+
+.btns1 {
+  position: absolute;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: ease-out;
+  color: white;
+  padding: 8px;
+  margin-left: 1100px;
+
+  background-color: #493ffc;
+  border-style: solid;
+  border-width: 2px;
+  border-color: white;
+  width: 175px;
+  height: 60px;
+  text-align: center;
+  line-height: 1.1em;
+  font-size: 1.5em;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.btns1:hover {
+  transform: scale(1.15);
+  transition-duration: 0.3s;
+}
