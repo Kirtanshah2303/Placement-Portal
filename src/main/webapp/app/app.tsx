@@ -17,7 +17,8 @@ import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
-
+import Logins from 'app/Demo/Login';
+import PrimarySearchAppBar from 'app/Components/Landing/navbar_landing';
 const baseHref = document.querySelector('base').getAttribute('href').replace(/\/$/, '');
 
 export const App = () => {
@@ -49,6 +50,7 @@ export const App = () => {
             isInProduction={isInProduction}
             isOpenAPIEnabled={isOpenAPIEnabled}
           />
+          {/*<PrimarySearchAppBar />*/}
         </ErrorBoundary>
         <div className="container-fluid view-container" id="app-view-container">
           <Card className="jh-card">

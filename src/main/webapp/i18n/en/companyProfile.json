@@ -1,0 +1,36 @@
+{
+  "placementPortalApp": {
+    "companyProfile": {
+      "home": {
+        "title": "Company Profiles",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Company Profile",
+        "createOrEditLabel": "Create or edit a Company Profile",
+        "notFound": "No Company Profiles found"
+      },
+      "created": "A new Company Profile is created with identifier {{ param }}",
+      "updated": "A Company Profile is updated with identifier {{ param }}",
+      "deleted": "A Company Profile is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Company Profile {{ id }}?"
+      },
+      "detail": {
+        "title": "Company Profile"
+      },
+      "id": "Id",
+      "email": "Email",
+      "address": "Address",
+      "contactNumber": "Contact Number",
+      "linkedinProfile": "Linkedin Profile",
+      "location": "Location",
+      "technology": "Technology",
+      "ctc": "Ctc",
+      "overview": "Overview",
+      "bond": "Bond",
+      "minimumCriteria": "Minimum Criteria",
+      "type": "Type",
+      "noOfOpenings": "No Of Openings",
+      "user": "User"
+    }
+  }
+}

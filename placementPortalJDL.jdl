@@ -1,0 +1,49 @@
+entity StudentProfile{
+    	id Long required
+    	studentID String required
+    	personalEmail String maxlength(600) required
+	    address String maxlength(600) required
+	    contactNumber Long required
+	    linkedinProfile String maxlength(600) required
+	    dob LocalDate required
+	    location String maxlength(600) required
+	    githubProfile String maxlength(600) required
+	    cgpa Double required
+	    noOfBacklogs Integer required
+}
+
+entity CompanyProfile{
+	id Long required
+	email String maxlength(600) required
+	address String maxlength(600) required
+	contactNumber Long required
+	linkedinProfile String maxlength(600) required
+	location String maxlength(600) required
+	technology String required
+	ctc String required
+	overview String maxlength(600) required
+	bond Integer required
+	minimumCriteria String maxlength(600) required
+	type String required
+	noOfOpenings Integer required
+}
+
+entity StudentCompanyStatus{
+    id Long required
+	ctc String required
+	location String maxlength(600) required
+	status String required
+}
+
+relationship ManyToOne {
+	StudentProfile{user(login)} to User
+	CompanyProfile{user(login)} to User
+	StudentCompanyStatus{student(studentID)} to StudentProfile
+	StudentCompanyStatus{company(id)} to CompanyProfile
+}
+
+// Options
+service * with serviceImpl
+paginate * with pagination
+dto * with mapstruct
+filter *
