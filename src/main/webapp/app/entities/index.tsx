@@ -25,7 +25,7 @@ const Routes = ({ match }) => (
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       <ErrorBoundaryRoute path="/SignIn" component={Login} />
       <ErrorBoundaryRoute path="/SignUp" component={Signin} />
-      <PrivateRoute path="/LandingPage" component={LandingPage} hasAnyAuthorities={[AUTHORITIES.USER]} />
+      <PrivateRoute path="/LandingPage" component={LandingPage} hasAnyAuthorities={[AUTHORITIES.STUDENT]} />
     </Switch>
   </div>
 );

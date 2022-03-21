@@ -3,7 +3,8 @@ import './home.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Translate } from 'react-jhipster';
-import { Row, Col, Alert } from 'reactstrap';
+import { Row, Col, Alert, Button } from 'reactstrap';
+import studentProfileUpdate from '../../entities/student-profile/student-profile-update';
 
 import { useAppSelector } from 'app/config/store';
 
@@ -29,6 +30,7 @@ export const Home = () => {
                 You are logged in as user {account.login}.
               </Translate>
             </Alert>
+            <Link to={`/student-profile/new?id=${account.login}`}>Your Profile</Link>
           </div>
         ) : (
           <div>
