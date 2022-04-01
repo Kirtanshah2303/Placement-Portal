@@ -16,6 +16,7 @@ const initialState: EntityState<ICompanyProfile> = {
 };
 
 const apiUrl = 'api/company-profiles';
+const apiUrl2 = 'api/company-profile';
 
 // Actions
 
@@ -37,6 +38,16 @@ export const createEntity = createAsyncThunk(
   'companyProfile/create_entity',
   async (entity: ICompanyProfile, thunkAPI) => {
     const result = await axios.post<ICompanyProfile>(apiUrl, cleanEntity(entity));
+    thunkAPI.dispatch(getEntities({}));
+    return result;
+  },
+  { serializeError: serializeAxiosError }
+);
+
+export const createProfile = createAsyncThunk(
+  'companyProfile/create_profile',
+  async (entity: ICompanyProfile, thunkAPI) => {
+    const result = await axios.post<ICompanyProfile>(apiUrl2, cleanEntity(entity));
     thunkAPI.dispatch(getEntities({}));
     return result;
   },

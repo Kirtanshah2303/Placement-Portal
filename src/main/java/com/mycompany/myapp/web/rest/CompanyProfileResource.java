@@ -78,6 +78,27 @@ public class CompanyProfileResource {
     }
 
     /**
+     * {@code POST  /company-profiles} : Create a new companyProfile from Company Side.
+     *
+     * @param companyProfileDTO the companyProfileDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new companyProfileDTO, or with status {@code 400 (Bad Request)} if the companyProfile has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/company-profile")
+    public ResponseEntity<CompanyProfileDTO> createCompanyProfileFromCompany(@Valid @RequestBody CompanyProfileDTO companyProfileDTO)
+        throws URISyntaxException {
+        log.debug("REST request to save CompanyProfile : {}", companyProfileDTO);
+        if (companyProfileDTO.getId() != null) {
+            throw new BadRequestAlertException("A new companyProfile cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        CompanyProfileDTO result = companyProfileService.save(companyProfileDTO);
+        return ResponseEntity
+            .created(new URI("/api/company-profile/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
      * {@code PUT  /company-profiles/:id} : Updates an existing companyProfile.
      *
      * @param id the id of the companyProfileDTO to save.

@@ -3,6 +3,7 @@ package com.mycompany.myapp.service.impl;
 import com.mycompany.myapp.domain.CompanyProfile;
 import com.mycompany.myapp.repository.CompanyProfileRepository;
 import com.mycompany.myapp.service.CompanyProfileService;
+import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.dto.CompanyProfileDTO;
 import com.mycompany.myapp.service.mapper.CompanyProfileMapper;
 import java.util.Optional;
@@ -25,17 +26,29 @@ public class CompanyProfileServiceImpl implements CompanyProfileService {
     private final CompanyProfileRepository companyProfileRepository;
 
     private final CompanyProfileMapper companyProfileMapper;
+    private final UserService userService;
 
-    public CompanyProfileServiceImpl(CompanyProfileRepository companyProfileRepository, CompanyProfileMapper companyProfileMapper) {
+    public CompanyProfileServiceImpl(
+        CompanyProfileRepository companyProfileRepository,
+        CompanyProfileMapper companyProfileMapper,
+        UserService userService
+    ) {
         this.companyProfileRepository = companyProfileRepository;
         this.companyProfileMapper = companyProfileMapper;
+        this.userService = userService;
     }
 
     @Override
     public CompanyProfileDTO save(CompanyProfileDTO companyProfileDTO) {
         log.debug("Request to save CompanyProfile : {}", companyProfileDTO);
         CompanyProfile companyProfile = companyProfileMapper.toEntity(companyProfileDTO);
-        companyProfile = companyProfileRepository.save(companyProfile);
+        if (companyProfileDTO.getUser() == null) {
+            companyProfile.setUser(userService.getUserWithAuthorities().get());
+            companyProfile = companyProfileRepository.save(companyProfile);
+        } else {
+            companyProfile = companyProfileRepository.save(companyProfile);
+        }
+        //        companyProfile = companyProfileRepository.save(companyProfile);
         return companyProfileMapper.toDto(companyProfile);
     }
 
