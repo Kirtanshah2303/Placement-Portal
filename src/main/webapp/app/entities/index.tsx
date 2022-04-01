@@ -13,6 +13,7 @@ import LandingPage from 'app/entities/Landing_Page/LandingPage';
 import StudentProfile from './student-profile';
 import CompanyProfile from './company-profile';
 import StudentCompanyStatus from './student-company-status';
+import NewCard from 'app/entities/Card/StudentCard';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -26,6 +27,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path="/SignIn" component={Login} />
       <ErrorBoundaryRoute path="/SignUp" component={Signin} />
       <PrivateRoute path="/LandingPage" component={LandingPage} hasAnyAuthorities={[AUTHORITIES.STUDENT]} />
+      <ErrorBoundaryRoute path="/card" component={NewCard} />
     </Switch>
   </div>
 );

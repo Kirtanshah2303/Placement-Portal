@@ -5,7 +5,7 @@ import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'r
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IUser } from 'app/shared/model/user.model';
-import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
+import { getUser, getUsers } from 'app/modules/administration/user-management/user-management.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './student-profile.reducer';
 import { IStudentProfile } from 'app/shared/model/student-profile.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
