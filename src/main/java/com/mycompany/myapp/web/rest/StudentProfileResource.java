@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.repository.StudentProfileRepository;
 import com.mycompany.myapp.service.StudentProfileQueryService;
 import com.mycompany.myapp.service.StudentProfileService;
+import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.criteria.StudentProfileCriteria;
 import com.mycompany.myapp.service.dto.StudentProfileDTO;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
@@ -70,6 +71,28 @@ public class StudentProfileResource {
         if (studentProfileDTO.getId() != null) {
             throw new BadRequestAlertException("A new studentProfile cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        StudentProfileDTO result = studentProfileService.save(studentProfileDTO);
+        return ResponseEntity
+            .created(new URI("/api/student-profiles/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * {@code POST  /student-profiles} : Create a new studentProfile from Student.
+     *
+     * @param studentProfileDTO the studentProfileDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new studentProfileDTO, or with status {@code 400 (Bad Request)} if the studentProfile has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/student-profile")
+    public ResponseEntity<StudentProfileDTO> createStudentProfilefromStudent(@Valid @RequestBody StudentProfileDTO studentProfileDTO)
+        throws URISyntaxException {
+        log.debug("REST request to save StudentProfile : {}", studentProfileDTO);
+        if (studentProfileDTO.getId() != null) {
+            throw new BadRequestAlertException("A new studentProfile cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        System.out.println("HAHAHAHAH");
         StudentProfileDTO result = studentProfileService.save(studentProfileDTO);
         return ResponseEntity
             .created(new URI("/api/student-profiles/" + result.getId()))

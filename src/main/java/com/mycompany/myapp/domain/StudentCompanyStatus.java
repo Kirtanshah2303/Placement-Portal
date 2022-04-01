@@ -37,10 +37,12 @@ public class StudentCompanyStatus implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
+    @JoinColumn(name = "Student_ID")
     private StudentProfile student;
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
+    @JoinColumn(name = "Company_ID")
     private CompanyProfile company;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

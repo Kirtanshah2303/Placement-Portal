@@ -2,6 +2,7 @@ package com.mycompany.myapp.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -69,6 +70,17 @@ public class StudentProfile implements Serializable {
 
     @ManyToOne
     private User user;
+
+    @OneToMany
+    private Set<StudentCompanyStatus> studentCompanyStatusSet;
+
+    public Set<StudentCompanyStatus> getStudentCompanyStatusSet() {
+        return studentCompanyStatusSet;
+    }
+
+    public void setStudentCompanyStatusSet(Set<StudentCompanyStatus> studentCompanyStatusSet) {
+        this.studentCompanyStatusSet = studentCompanyStatusSet;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 

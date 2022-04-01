@@ -16,6 +16,7 @@ const initialState: EntityState<IStudentProfile> = {
 };
 
 const apiUrl = 'api/student-profiles';
+const apiUrl2 = 'api/student-profile';
 
 // Actions
 
@@ -37,6 +38,16 @@ export const createEntity = createAsyncThunk(
   'studentProfile/create_entity',
   async (entity: IStudentProfile, thunkAPI) => {
     const result = await axios.post<IStudentProfile>(apiUrl, cleanEntity(entity));
+    thunkAPI.dispatch(getEntities({}));
+    return result;
+  },
+  { serializeError: serializeAxiosError }
+);
+
+export const createStudentProfile = createAsyncThunk(
+  'studentProfile/create_entity',
+  async (entity: IStudentProfile, thunkAPI) => {
+    const result = await axios.post<IStudentProfile>(apiUrl2, cleanEntity(entity));
     thunkAPI.dispatch(getEntities({}));
     return result;
   },

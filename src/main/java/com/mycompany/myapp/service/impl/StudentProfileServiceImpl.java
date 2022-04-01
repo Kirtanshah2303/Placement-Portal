@@ -3,6 +3,7 @@ package com.mycompany.myapp.service.impl;
 import com.mycompany.myapp.domain.StudentProfile;
 import com.mycompany.myapp.repository.StudentProfileRepository;
 import com.mycompany.myapp.service.StudentProfileService;
+import com.mycompany.myapp.service.UserService;
 import com.mycompany.myapp.service.dto.StudentProfileDTO;
 import com.mycompany.myapp.service.mapper.StudentProfileMapper;
 import java.util.Optional;
@@ -26,16 +27,29 @@ public class StudentProfileServiceImpl implements StudentProfileService {
 
     private final StudentProfileMapper studentProfileMapper;
 
-    public StudentProfileServiceImpl(StudentProfileRepository studentProfileRepository, StudentProfileMapper studentProfileMapper) {
+    private final UserService userService;
+
+    public StudentProfileServiceImpl(
+        StudentProfileRepository studentProfileRepository,
+        StudentProfileMapper studentProfileMapper,
+        UserService userService
+    ) {
         this.studentProfileRepository = studentProfileRepository;
         this.studentProfileMapper = studentProfileMapper;
+        this.userService = userService;
     }
 
     @Override
     public StudentProfileDTO save(StudentProfileDTO studentProfileDTO) {
         log.debug("Request to save StudentProfile : {}", studentProfileDTO);
         StudentProfile studentProfile = studentProfileMapper.toEntity(studentProfileDTO);
-        studentProfile = studentProfileRepository.save(studentProfile);
+        if (studentProfileDTO.getUser() == null) {
+            studentProfile.setUser(userService.getUserWithAuthorities().get());
+            studentProfile = studentProfileRepository.save(studentProfile);
+        } else {
+            studentProfile = studentProfileRepository.save(studentProfile);
+        }
+        //        studentProfile = studentProfileRepository.save(studentProfile);
         return studentProfileMapper.toDto(studentProfile);
     }
 
